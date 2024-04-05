@@ -20,8 +20,11 @@ struct ContentView: View {
                 
             })
             .padding()
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             .background(.pink.opacity(0.0))
             .clipShape(.rect(cornerRadius: 10))
+            
+            Spacer()
         })
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
     }

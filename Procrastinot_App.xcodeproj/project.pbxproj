@@ -77,6 +77,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A98B4022BC0B6A5004BD2B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A99EA7A2BC005E1006B41B3 /* Task.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A98B4032BC0B6ED004BD2B8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4A37AF7B2BC00EF300EA61EE /* +View.swift */,
+				4A37AF7D2BC010F900EA61EE /* DateExtensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4A99EA442BC005B0006B41B3 = {
 			isa = PBXGroup;
 			children = (
@@ -100,11 +117,10 @@
 		4A99EA4F2BC005B0006B41B3 /* Procrastinot_App */ = {
 			isa = PBXGroup;
 			children = (
-				4A99EA502BC005B0006B41B3 /* Procrastinot_AppApp.swift */,
-				4A99EA7A2BC005E1006B41B3 /* Task.swift */,
-				4A37AF7B2BC00EF300EA61EE /* +View.swift */,
+				4A98B4032BC0B6ED004BD2B8 /* Helpers */,
+				4A98B4022BC0B6A5004BD2B8 /* Model */,
 				4A99EA522BC005B0006B41B3 /* ContentView.swift */,
-				4A37AF7D2BC010F900EA61EE /* DateExtensions.swift */,
+				4A99EA502BC005B0006B41B3 /* Procrastinot_AppApp.swift */,
 				4A99EA542BC005B1006B41B3 /* Assets.xcassets */,
 				4A99EA562BC005B1006B41B3 /* Preview Content */,
 			);
