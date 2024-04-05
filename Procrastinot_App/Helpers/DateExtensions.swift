@@ -14,4 +14,8 @@ extension Date{
         
         return formatter.string(from: self)
     }
+    struct WeekDay: Identifiable {
+        var id: UUID = .init()
+        var date: Date
+    }
 }
