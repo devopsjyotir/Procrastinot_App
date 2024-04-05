@@ -13,8 +13,17 @@ struct ContentView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
-            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+            VStack(alignment: .leading, content: {
+                Text("April")
+                    .font(.system(size: 36, weight: .semibold))
+                
+                
+            })
+            .padding()
+            .background(.pink.opacity(0.0))
+            .clipShape(.rect(cornerRadius: 10))
         })
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
     }
 }
 
