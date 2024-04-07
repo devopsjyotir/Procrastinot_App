@@ -44,9 +44,9 @@ extension Date{
     }
     
     // Generating the schedule for the upcoming week, using the date from the previous/current week.
-    func createNextWeek(_ lastDate: Date) -> [WeekDay] {
+    func createNextWeek() -> [WeekDay] {
         let calendar = Calendar.current
-        let startOfLastDate = calendar.startOfDay(for: lastDate)
+        let startOfLastDate = calendar.startOfDay(for: self)
         guard let nextDate = calendar.date(byAdding: .day, value: 1, to: startOfLastDate) else {
             return []
         }
@@ -56,14 +56,14 @@ extension Date{
     }
     
     // Generating the schedule for the Previous week, using the date from the First current week.
-    func createPreviousWeek(_ firstDate: Date) -> [WeekDay] {
+    func createPreviousWeek() -> [WeekDay] {
         let calendar = Calendar.current
-        let startOfFirstDate = calendar.startOfDay(for: firstDate)
-        guard let nextDate = calendar.date(byAdding: .day, value: 1, to: startOfFirstDate) else {
+        let startOfFirstDate = calendar.startOfDay(for: self)
+        guard let previousDate = calendar.date(byAdding: .day, value: -1, to: startOfFirstDate) else {
             return []
         }
         
-        return fetchWeek(nextDate)
+        return fetchWeek(previousDate)
         
     }
     

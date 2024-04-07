@@ -18,6 +18,7 @@
 		4A99EA6C2BC005B1006B41B3 /* Procrastinot_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA6B2BC005B1006B41B3 /* Procrastinot_AppUITests.swift */; };
 		4A99EA6E2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA6D2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift */; };
 		4A99EA7B2BC005E1006B41B3 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA7A2BC005E1006B41B3 /* Task.swift */; };
+		4AD0BC4B2BC2B7F800AAD69E /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC4A2BC2B7F800AAD69E /* OffsetKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		4A99EA6B2BC005B1006B41B3 /* Procrastinot_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Procrastinot_AppUITests.swift; sourceTree = "<group>"; };
 		4A99EA6D2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Procrastinot_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4A99EA7A2BC005E1006B41B3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		4AD0BC4A2BC2B7F800AAD69E /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				4A37AF7B2BC00EF300EA61EE /* +View.swift */,
 				4A37AF7D2BC010F900EA61EE /* DateExtensions.swift */,
+				4AD0BC4A2BC2B7F800AAD69E /* OffsetKey.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				4A37AF7C2BC00EF300EA61EE /* +View.swift in Sources */,
 				4A37AF7E2BC010F900EA61EE /* DateExtensions.swift in Sources */,
 				4A99EA532BC005B0006B41B3 /* ContentView.swift in Sources */,
+				4AD0BC4B2BC2B7F800AAD69E /* OffsetKey.swift in Sources */,
 				4A99EA7B2BC005E1006B41B3 /* Task.swift in Sources */,
 				4A98B4062BC0B8A7004BD2B8 /* Home.swift in Sources */,
 				4A99EA512BC005B0006B41B3 /* Procrastinot_AppApp.swift in Sources */,

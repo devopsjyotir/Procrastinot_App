@@ -12,6 +12,7 @@ struct Home: View {
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 1
+    @State private var createWeek: Bool = false
     /// Animation for title space
     @Namespace private var animation
     var body: some View {
@@ -20,16 +21,16 @@ struct Home: View {
         })
         .vSpacing(.top)
         .onAppear(perform: {
-            if weekSlider.isEmpty{
+            if weekSlider.isEmpty {
                 let currentWeek =  Date().fetchWeek()
                 
                 if let firstDate = currentWeek.first?.date {
-                    
+                    weekSlider.append(firstDate.createPreviousWeek())
                 }
                 weekSlider.append(currentWeek)
                 
                 if let lastDate = currentWeek.last?.date {
-                    
+                    weekSlider.append(lastDate.createNextWeek())
                 }
             }
         })
@@ -63,24 +64,29 @@ struct Home: View {
                         .tag(index)
                 }
             }
+            
             .padding(.horizontal, -15)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(height: 90)
-            
         }
         .hSpacing(.leading)
         .overlay(alignment: .topTrailing, content: {
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                 Image(.photo)
                     .resizable()
-                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 50, height: 50)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    .clipShape(Circle())
             })
         })
         .padding(15)
-        
         .background(.white)
+        .onChange(of: currentWeekIndex, initial: false) { oldValue, newValue in
+            // Handling the logic when it reaches the first or last page
+            if newValue == 0 || newValue == (weekSlider.count - 1) {
+                createWeek = true
+            }
+        }
     }
     
     ///  Week View
@@ -97,7 +103,7 @@ struct Home: View {
                     
                     Text(day.date.format("d"))
                         .font(.callout)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .textScale(.secondary)
                         .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .black)
                         .frame(width: 25, height: 25, alignment: .center)
@@ -108,11 +114,11 @@ struct Home: View {
                                     .matchedGeometryEffect(id: "TABINDICATOR", in: animation)
                             }
                             
-//                            if day.date.isCurrentDay {
-//
-//                            }
+                            //                            if day.date.isCurrentDay {
+                            //
+                            //                            }
                         })
-                        
+                    
                 }
                 .hSpacing(.center)
                 .contentShape(.rect)
@@ -123,6 +129,42 @@ struct Home: View {
                 }
             }
         }
+        .background {
+            GeometryReader {
+                let minX = $0.frame(in: .global).minX
+                
+                Color.clear
+                    .preference(key: OffsetKey.self, value: minX)
+                    .onPreferenceChange(OffsetKey.self){ value in
+                        /// When the offset reaches 15 and the 'createWeek' toggle is enabled, proceed to generate the next set of weeks.
+                        if value.rounded() == 15 && createWeek {
+                            paginateWeek()
+                            createWeek = false
+                        }
+                    }
+            }
+        }
+    }
+    
+    func paginateWeek() {
+        /// SafeCheck
+        if weekSlider.indices.contains(currentWeekIndex) {
+            if let firstDate = weekSlider[currentWeekIndex].first?.date, currentWeekIndex == 0 {
+                /// Inserting New Week at 0th Index and Removing Last Array Item
+                weekSlider.insert(firstDate.createPreviousWeek(), at: 0)
+                weekSlider.removeLast()
+                currentWeekIndex = 1
+            }
+            
+            if let lastDate = weekSlider[currentWeekIndex].last?.date, currentWeekIndex == (weekSlider.count - 1) {
+                /// Appending New Week at Last Index and Removing First Array Item
+                weekSlider.append(lastDate.createNextWeek())
+                weekSlider.removeFirst()
+                currentWeekIndex = weekSlider.count - 2
+            }
+        }
+        
+        print(weekSlider.count)
     }
 }
 
