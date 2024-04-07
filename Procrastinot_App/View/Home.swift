@@ -13,13 +13,43 @@ struct Home: View {
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 1
     @State private var createWeek: Bool = false
+    @State private var createNewTask: Bool = false
     /// Animation for title space
     @Namespace private var animation
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
+            
+            GeometryReader {
+                let size = $0.size
+                
+                ScrollView(.vertical) {
+                    VStack {
+                        /// Tasks View
+                        TasksView(
+                            size: size,
+                            currentDate: $currentDate
+                        )
+                    }
+                    .hSpacing(.center)
+                    .vSpacing(.center)
+                }
+                .scrollIndicators(.hidden)
+            }
         })
         .vSpacing(.top)
+        .overlay(alignment: .bottomTrailing, content: {
+            Button(action: {
+                createNewTask.toggle()
+            }, label: {
+                Image(systemName: "plus")
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+                    .frame(width: 55, height: 55)
+                    .background(.darkBrown.shadow(.drop(color: .black.opacity(0.25), radius: 5, x: 10, y: 10)), in: .circle)
+            })
+            .padding(15)
+        })
         .onAppear(perform: {
             if weekSlider.isEmpty {
                 let currentWeek =  Date().fetchWeek()
@@ -33,6 +63,13 @@ struct Home: View {
                     weekSlider.append(lastDate.createNextWeek())
                 }
             }
+        })
+        .sheet(isPresented: $createNewTask, content: {
+            NewTaskView()
+                .presentationDetents([.height(300)])
+                .interactiveDismissDisabled()
+                .presentationCornerRadius(30)
+                .presentationBackground(.BG)
         })
     }
     

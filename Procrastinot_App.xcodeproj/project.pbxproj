@@ -17,8 +17,11 @@
 		4A99EA622BC005B1006B41B3 /* Procrastinot_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA612BC005B1006B41B3 /* Procrastinot_AppTests.swift */; };
 		4A99EA6C2BC005B1006B41B3 /* Procrastinot_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA6B2BC005B1006B41B3 /* Procrastinot_AppUITests.swift */; };
 		4A99EA6E2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA6D2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift */; };
-		4A99EA7B2BC005E1006B41B3 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99EA7A2BC005E1006B41B3 /* Task.swift */; };
 		4AD0BC4B2BC2B7F800AAD69E /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC4A2BC2B7F800AAD69E /* OffsetKey.swift */; };
+		4AD0BC4D2BC2BF0300AAD69E /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC4C2BC2BF0300AAD69E /* TasksView.swift */; };
+		4AD0BC4F2BC2BF4500AAD69E /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC4E2BC2BF4500AAD69E /* NewTaskView.swift */; };
+		4AD0BC512BC2BF7C00AAD69E /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC502BC2BF7C00AAD69E /* TaskRowView.swift */; };
+		4AD0BC542BC2C4DB00AAD69E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0BC532BC2C4DB00AAD69E /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +55,12 @@
 		4A99EA672BC005B1006B41B3 /* Procrastinot_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Procrastinot_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A99EA6B2BC005B1006B41B3 /* Procrastinot_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Procrastinot_AppUITests.swift; sourceTree = "<group>"; };
 		4A99EA6D2BC005B1006B41B3 /* Procrastinot_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Procrastinot_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		4A99EA7A2BC005E1006B41B3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		4AD0BC4A2BC2B7F800AAD69E /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
+		4AD0BC4C2BC2BF0300AAD69E /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		4AD0BC4E2BC2BF4500AAD69E /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4AD0BC502BC2BF7C00AAD69E /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4AD0BC522BC2BFD900AAD69E /* Task_Management.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Task_Management.entitlements; path = "../../../Downloads/Task Management/Task Management/Task_Management.entitlements"; sourceTree = "<group>"; };
+		4AD0BC532BC2C4DB00AAD69E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +91,7 @@
 		4A98B4022BC0B6A5004BD2B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4A99EA7A2BC005E1006B41B3 /* Task.swift */,
+				4AD0BC532BC2C4DB00AAD69E /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				4A98B4052BC0B8A7004BD2B8 /* Home.swift */,
+				4AD0BC502BC2BF7C00AAD69E /* TaskRowView.swift */,
+				4AD0BC4E2BC2BF4500AAD69E /* NewTaskView.swift */,
+				4AD0BC4C2BC2BF0300AAD69E /* TasksView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -133,9 +143,10 @@
 				4A98B4042BC0B881004BD2B8 /* View */,
 				4A98B4032BC0B6ED004BD2B8 /* Helpers */,
 				4A98B4022BC0B6A5004BD2B8 /* Model */,
-				4A99EA522BC005B0006B41B3 /* ContentView.swift */,
 				4A99EA502BC005B0006B41B3 /* Procrastinot_AppApp.swift */,
+				4A99EA522BC005B0006B41B3 /* ContentView.swift */,
 				4A99EA542BC005B1006B41B3 /* Assets.xcassets */,
+				4AD0BC522BC2BFD900AAD69E /* Task_Management.entitlements */,
 				4A99EA562BC005B1006B41B3 /* Preview Content */,
 			);
 			path = Procrastinot_App;
@@ -296,11 +307,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AD0BC512BC2BF7C00AAD69E /* TaskRowView.swift in Sources */,
 				4A37AF7C2BC00EF300EA61EE /* +View.swift in Sources */,
+				4AD0BC542BC2C4DB00AAD69E /* Task.swift in Sources */,
 				4A37AF7E2BC010F900EA61EE /* DateExtensions.swift in Sources */,
+				4AD0BC4F2BC2BF4500AAD69E /* NewTaskView.swift in Sources */,
 				4A99EA532BC005B0006B41B3 /* ContentView.swift in Sources */,
+				4AD0BC4D2BC2BF0300AAD69E /* TasksView.swift in Sources */,
 				4AD0BC4B2BC2B7F800AAD69E /* OffsetKey.swift in Sources */,
-				4A99EA7B2BC005E1006B41B3 /* Task.swift in Sources */,
 				4A98B4062BC0B8A7004BD2B8 /* Home.swift in Sources */,
 				4A99EA512BC005B0006B41B3 /* Procrastinot_AppApp.swift in Sources */,
 			);
