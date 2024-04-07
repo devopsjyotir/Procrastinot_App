@@ -31,6 +31,10 @@ class Task: Identifiable {
         case "TaskColor 3": return .taskColor3
         case "TaskColor 4": return .taskColor4
         case "TaskColor 5": return .taskColor5
+        case "TaskColor 6": return .taskColor6
+        case "TaskColor 7": return .taskColor7
+        case "TaskColor 8": return .taskColor8
+        case "TaskColor 9": return .taskColor9
         default: return .black
         }
     }

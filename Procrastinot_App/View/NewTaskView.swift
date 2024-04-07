@@ -13,82 +13,83 @@ struct NewTaskView: View {
     /// Model Context For Saving Data
     @Environment(\.modelContext) private var context
     @State private var taskTitle: String = ""
-    @State private var taskDate: Date = .init()
+    @State private var taskStartDate: Date = .init()
+    @State private var taskEndDate: Date = .init()
     @State private var taskColor: String = "TaskColor 1"
     var body: some View {
-        VStack(alignment: .leading, spacing: 15, content: {
+        VStack(alignment: .leading, spacing: 15) {
             Button(action: {
                 dismiss()
             }, label: {
-                Image(systemName: "xmark.circle.fill")
+                Image(systemName: "xmark.circle")
                     .font(.title)
-                    .tint(.red)
+                    .foregroundColor(.none) // Changed color to black
             })
-            .hSpacing(.leading)
+            .padding(.leading) // Changed indentation
             
-            VStack(alignment: .leading, spacing: 8, content: {
-                Text("Task Title")
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Task Name") // Changed "Task Title" to "Task Name"
                     .font(.caption)
-                    .foregroundStyle(.gray)
+                    .foregroundColor(.gray) // Changed to gray
                 
                 TextField("Go for a Walk!", text: $taskTitle)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 15)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-            })
-            .padding(.top, 5)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1)) // Simplified background style
+            }
             
             HStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 8, content: {
-                    Text("Task Date")
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Task Start Time") // Changed "Task Date" to "Task Start Time"
                         .font(.caption)
-                        .foregroundStyle(.gray)
+                        .foregroundColor(.gray)
                     
-                    DatePicker("", selection: $taskDate)
+                    DatePicker("", selection: $taskStartDate, displayedComponents: .hourAndMinute) // Allow picking start time
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
-                })
-                /// Giving Some Space for tapping
-                .padding(.trailing, -15)
+                }
                 
-                VStack(alignment: .leading, spacing: 8, content: {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Task End Time") // Added "Task End Time"
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    
+                    DatePicker("", selection: $taskEndDate, displayedComponents: .hourAndMinute) // Allow picking end time
+                        .datePickerStyle(.compact)
+                        .scaleEffect(0.9, anchor: .leading)
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
                     Text("Task Color")
                         .font(.caption)
-                        .foregroundStyle(.gray)
+                        .foregroundColor(.gray)
                     
-                    let colors: [String] = (1...5).compactMap { index -> String in
-                        return "TaskColor \(index)"
-                    }
+                    let colors: [String] = (1...5).map { "TaskColor \($0)" }
                     
                     HStack(spacing: 0) {
                         ForEach(colors, id: \.self) { color in
                             Circle()
                                 .fill(Color(color))
                                 .frame(width: 20, height: 20)
-                                .background(content: {
-                                    Circle()
-                                        .stroke(lineWidth: 2)
-                                        .opacity(taskColor == color ? 1 : 0)
-                                })
-                                .hSpacing(.center)
-                                .contentShape(.rect)
+                                .overlay(
+                                    Circle().stroke(Color.black, lineWidth: taskColor == color ? 2 : 0) // Simplified color selection style
+                                )
                                 .onTapGesture {
-                                    withAnimation(.snappy) {
+                                    withAnimation(.easeInOut) { // Changed animation
                                         taskColor = color
                                     }
                                 }
+                                .padding(.horizontal, 5) // Added padding
                         }
                     }
-                })
-                
+                }
             }
-            .padding(.top, 5)
             
-            Spacer(minLength: 0)
+            Spacer()
             
             Button(action: {
                 /// Saving Task
-                let task = Task(taskTitle: taskTitle, creationDate: taskDate, tint: taskColor)
+                let task = Task(taskTitle: taskTitle, creationDate: taskStartDate, isCompleted: false, tint: taskColor) // Updated Task initialization
+
                 do {
                     context.insert(task)
                     try context.save()
@@ -101,20 +102,20 @@ struct NewTaskView: View {
                 Text("Create Task")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .textScale(.secondary)
-                    .foregroundStyle(.black)
-                    .hSpacing(.center)
-                    .padding(.vertical, 12)
-                    .background(Color(taskColor), in: .rect(cornerRadius: 10))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(taskColor), in: RoundedRectangle(cornerRadius: 10)) // Updated background style
             })
-            .disabled(taskTitle == "")
-            .opacity(taskTitle == "" ? 0.5 : 1)
-        })
+            .disabled(taskTitle.isEmpty || taskStartDate > taskEndDate) // Disabled when title is empty or start time is after end time
+            .opacity(taskTitle.isEmpty || taskStartDate > taskEndDate ? 0.5 : 1) // Adjusted opacity
+            .padding() // Added padding
+        }
         .padding(15)
     }
 }
 
 #Preview {
     NewTaskView()
-        .vSpacing(.bottom)
+        .padding()
 }
+
