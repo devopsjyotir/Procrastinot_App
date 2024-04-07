@@ -16,6 +16,12 @@ extension Date{
         return formatter.string(from: self)
     }
     
+    
+    /// Verifying if the Date corresponds to the current day.
+    var isCurrentDay: Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    
     /// FetchWeek Based on Inputted Date
     func fetchWeek(_ date: Date = .init()) -> [WeekDay] {
         let calendar = Calendar.current
@@ -36,6 +42,31 @@ extension Date{
         
         return week
     }
+    
+    // Generating the schedule for the upcoming week, using the date from the previous/current week.
+    func createNextWeek(_ lastDate: Date) -> [WeekDay] {
+        let calendar = Calendar.current
+        let startOfLastDate = calendar.startOfDay(for: lastDate)
+        guard let nextDate = calendar.date(byAdding: .day, value: 1, to: startOfLastDate) else {
+            return []
+        }
+        
+        return fetchWeek(nextDate)
+        
+    }
+    
+    // Generating the schedule for the Previous week, using the date from the First current week.
+    func createPreviousWeek(_ firstDate: Date) -> [WeekDay] {
+        let calendar = Calendar.current
+        let startOfFirstDate = calendar.startOfDay(for: firstDate)
+        guard let nextDate = calendar.date(byAdding: .day, value: 1, to: startOfFirstDate) else {
+            return []
+        }
+        
+        return fetchWeek(nextDate)
+        
+    }
+    
     
     struct WeekDay: Identifiable {
         var id: UUID = .init()

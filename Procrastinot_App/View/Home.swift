@@ -12,6 +12,8 @@ struct Home: View {
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 1
+    /// Animation for title space
+    @Namespace private var animation
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
@@ -20,7 +22,15 @@ struct Home: View {
         .onAppear(perform: {
             if weekSlider.isEmpty{
                 let currentWeek =  Date().fetchWeek()
+                
+                if let firstDate = currentWeek.first?.date {
+                    
+                }
                 weekSlider.append(currentWeek)
+                
+                if let lastDate = currentWeek.last?.date {
+                    
+                }
             }
         })
     }
@@ -31,7 +41,7 @@ struct Home: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 5) {
                 Text(currentDate.format("MMMM"))
-                    .foregroundStyle(.red)
+                    .foregroundStyle(.black)
                 
                 Text(currentDate.format("YYYY"))
                     .foregroundStyle(.gray)
@@ -89,16 +99,33 @@ struct Home: View {
                         .font(.callout)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .textScale(.secondary)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .black)
                         .frame(width: 25, height: 25, alignment: .center)
-//                        .background(.white.shadow(.drop(radius: 1)), in: .circle)
+                        .background(content: {
+                            if isSameDate(day.date, currentDate) {
+                                Circle()
+                                    .fill(.darkBrown)
+                                    .matchedGeometryEffect(id: "TABINDICATOR", in: animation)
+                            }
+                            
+//                            if day.date.isCurrentDay {
+//
+//                            }
+                        })
+                        
                 }
                 .hSpacing(.center)
+                .contentShape(.rect)
+                .onTapGesture {
+                    withAnimation(.snappy) {
+                        currentDate = day.date
+                    }
+                }
             }
         }
     }
 }
 
 #Preview {
-    Home()
+    ContentView()
 }
